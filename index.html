@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Swikriti ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff1493;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.15s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 20, 147, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(135deg, #ff1493, #ff69b4, #ffb6c1);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+            filter: blur(60px);
+        }
+
+        .shape1 { width: 300px; height: 300px; top: 10%; left: 10%; animation-delay: 0s; }
+        .shape2 { width: 400px; height: 400px; top: 50%; right: 10%; animation-delay: 5s; }
+        .shape3 { width: 250px; height: 250px; bottom: 10%; left: 30%; animation-delay: 10s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(50px, -50px) rotate(120deg); }
+            66% { transform: translate(-30px, 30px) rotate(240deg); }
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .landing {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .landing h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff1493, #ff69b4, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.5)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255, 105, 180, 0.8)); }
+        }
+
+        .landing p {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            animation: slideUp 1s ease 0.5s both;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: slideUp 1s ease 1s both;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 20, 147, 0.4);
+        }
+
+        .timeline {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .timeline h2 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #ff1493, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .memory-card {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 5rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .memory-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .memory-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .memory-image {
+            flex: 1;
+            min-width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #ff149320, #ff69b420);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .memory-image:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.3);
+        }
+
+        .memory-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .memory-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ff1493;
+        }
+
+        .memory-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .special-reveal {
+            background: rgba(255, 20, 147, 0.1);
+            border: 2px solid #ff1493;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 20, 147, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 20, 147, 0.6); }
+        }
+
+        .wishes-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .wishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .wish-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .wish-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .wish-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.3);
+            border-color: rgba(255, 20, 147, 0.5);
+        }
+
+        .wish-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .wish-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ff69b4;
+        }
+
+        .wish-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .final-message {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .final-message h2 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ff1493, #ff69b4, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-message p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff1493;
+            z-index: 9998;
+            animation: confetti-fall 3s linear forwards;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 100;
+            opacity: 0.7;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+
+        .scroll-indicator span {
+            font-size: 2rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .memory-card {
+                flex-direction: column !important;
+            }
+            
+            .memory-image {
+                min-width: 100%;
+                height: 250px;
+            }
+            
+            .cursor, .cursor-follower {
+                display: none;
+            }
+            
+            body {
+                cursor: auto;
+            }
+
+            .wishes-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <div class="bg-animation">
+        <div class="floating-shape shape1"></div>
+        <div class="floating-shape shape2"></div>
+        <div class="floating-shape shape3"></div>
+    </div>
+
+    <!-- Landing -->
+    <section class="section landing" id="landing">
+        <h1>Happy Birthday Baby! 🎉</h1>
+        <p>To my gurll, my darling... my everything 💕</p>
+        <button class="btn" onclick="startJourney()">Start Our Journey</button>
+        <div class="scroll-indicator">
+            <span>↓</span>
+        </div>
+    </section>
+
+    <!-- Our Story Timeline -->
+    <section class="section timeline hidden" id="timeline">
+        <div>
+            <h2>Our Love Story 💖</h2>
+            
+            <div class="memory-card">
+                <div class="memory-image">🏫</div>
+                <div class="memory-content">
+                    <h3>Class 6 - Where It All Began</h3>
+                    <p>Kalika Secondary School. That's where I first saw you. I didn't know then that the girl I met in class 6 would become my entire world. You were just another classmate back then, but destiny had other plans for us.</p>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <div class="memory-image">💬</div>
+                <div class="memory-content">
+                    <h3>Class 8 - Secret Feelings</h3>
+                    <p>By class 8, something changed. We started chatting regularly, and I realized you weren't just a friend anymore. Every message from you made my day. I was falling for you, but I kept it hidden... or tried to at least! 😊</p>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <div class="memory-image">🚌</div>
+                <div class="memory-content">
+                    <h3>Class 9 Tour - The Turning Point</h3>
+                    <p>That school tour in class 9... I'll never forget it. That's when we both felt it. The connection was undeniable. All those chats suddenly made sense. We weren't just friends anymore, we both knew it in our hearts.</p>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <div class="memory-image">💝</div>
+                <div class="memory-content">
+                    <h3>Class 10 - You Said Yes!</h3>
+                    <p>Finally, in class 10, you became my girlfriend! The best decision of my life was asking you, and your best decision was saying yes 😉. From classmates to friends to something so much more beautiful.</p>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <div class="memory-image">💌</div>
+                <div class="memory-content">
+                    <h3>The Paper Full of Kisses</h3>
+                    <p>4-5 months ago, you gave me that paper covered with your kisses. I still have it with me, always. It's one of my most precious treasures. Every time I look at it, I feel your love all over again.</p>
+                    <div class="special-reveal">
+                        <p style="color: #ff1493; font-weight: bold;">✨ I keep it close to my heart, just like I keep you ✨</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="memory-card">
+                <div class="memory-image">💋</div>
+                <div class="memory-content">
+                    <h3>20 Days Ago - Our Special Date</h3>
+                    <p>That day will always be special. We went to school together, then our date... When I kissed your lips and neck, time stopped. And you gave me that hair band - I'm wearing it right now as I make this for you. These little moments with you mean everything to me.</p>
+                    <div class="special-reveal">
+                        <p style="color: #ff1493; font-weight: bold;">💕 Best. Day. Ever. 💕</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dreams & Wishes -->
+    <section class="section hidden" id="wishes">
+        <div class="wishes-section">
+            <h2 style="text-align: center; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 3rem; background: linear-gradient(135deg, #ff1493, #ff69b4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">What I Wish For You 🌟</h2>
+            
+            <div class="wishes-grid">
+                <div class="wish-card">
+                    <div class="wish-icon">👩‍💼</div>
+                    <h3>Your CEO Dream</h3>
+                    <p>I know you want to be a CEO of your own company, and baby, you absolutely will be! Your determination and smartness will take you there. I'll be cheering for you every step of the way. You're gonna kill it! 💪</p>
+                </div>
+
+                <div class="wish-card">
+                    <div class="wish-icon">🎵</div>
+                    <h3>Keep Jamming</h3>
+                    <p>Never stop listening to The Chainsmokers and your favorite music. I love how your eyes light up when your favorite song plays. Music is your vibe, and it's one of the many things I adore about you! 🎧</p>
+                </div>
+
+                <div class="wish-card">
+                    <div class="wish-icon">😊</div>
+                    <h3>Always Be Happy</h3>
+                    <p>Always be happy in life, baby. Your smile is my favorite thing in this world. No matter what happens, I want to see that beautiful smile on your face every single day. You deserve all the happiness! ✨</p>
+                </div>
+
+                <div class="wish-card">
+                    <div class="wish-icon">👫</div>
+                    <h3>About Us</h3>
+                    <p>Ani aafno bf sanga dherai jhagada nagarnu hai! 😄 Bf le vaneko mannu, okay? Just kidding... but seriously, let's keep making beautiful memories together. You and me against the world! 💑</p>
+                </div>
+
+                <div class="wish-card">
+                    <div class="wish-icon">👁️</div>
+                    <h3>Lost in You</h3>
+                    <p>Your eyes... your hair... I get completely lost in them. Every time I look at you, I fall in love all over again. You're absolutely mesmerizing, and I can't believe you're mine. 😍</p>
+                </div>
+
+                <div class="wish-card">
+                    <div class="wish-icon">💍</div>
+                    <h3>Our Future</h3>
+                    <p>One day, after we both achieve our dreams, I want to marry you and build a small, happy family together. Just you, me, and our little world. That's my biggest dream - spending forever with you. 👨‍👩‍👧‍👦</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Message -->
+    <section class="section final-message hidden" id="final">
+        <div>
+            <h2>My Gurll, My Everything</h2>
+            <p>Swikriti Regmi, you came into my life in class 6 as just another student at Kalika Secondary School. But look at us now - class 11, and you're not just my girlfriend, you're my best friend, my favorite person, my everything.</p>
+            <p>From those early chats to our school tour feelings, from becoming my girlfriend in class 10 to all our special moments... every single memory with you is precious.</p>
+            <p>You're going to be an amazing CEO one day. You're smart, determined, and unstoppable. And I'll be right there beside you, supporting you, loving you, annoying you (because that's what bfs do! 😄).</p>
+            <p style="font-weight: bold; color: #ff1493; font-size: 1.5rem;">I love you sooooooooo much darling! 💕</p>
+            
+            <p id="signature" style="margin-top: 2rem; font-size: 1.5rem; font-style: italic; color: rgba(255, 255, 255, 0.9); opacity: 0; transition: opacity 2s ease;">Love from Kshitiz Neupane 💕</p>
+        </div>
+    </section>
+
+    <script>
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        function startJourney() {
+            createConfetti();
+            
+            setTimeout(() => {
+                document.getElementById('landing').classList.add('hidden');
+                document.getElementById('timeline').classList.remove('hidden');
+                window.scrollTo(0, 0);
+            }, 1000);
+        }
+
+        function createConfetti() {
+            const colors = ['#ff1493', '#ff69b4', '#ffb6c1', '#ffd700', '#ff69b4'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.memory-card, .wish-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        let currentSection = 0;
+        const sections = ['timeline', 'wishes', 'final'];
+        let transitionInProgress = false;
+
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY + window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            
+            if (scrollPosition >= documentHeight - 100 && currentSection < sections.length - 1 && !transitionInProgress) {
+                transitionInProgress = true;
+                setTimeout(() => {
+                    document.getElementById(sections[currentSection]).classList.add('hidden');
+                    currentSection++;
+                    document.getElementById(sections[currentSection]).classList.remove('hidden');
+                    window.scrollTo(0, 0);
+                    
+                    if (currentSection === sections.length - 1) {
+                        setTimeout(() => {
+                            const signature = document.getElementById('signature');
+                            if (signature) {
+                                signature.style.opacity = '1';
+                            }
+                        }, 2000);
+                    }
+                    
+                    setTimeout(() => {
+                        transitionInProgress = false;
+                    }, 1000);
+                }, 500);
+            }
+        });
+
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                follower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                follower.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
